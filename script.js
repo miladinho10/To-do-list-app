@@ -8,16 +8,17 @@ const taskList = document.querySelector("#task-list");
 const itemCounter = document.querySelector("#item-counter");
 
 const tasks = [];
+
+
+
 function render() {
     taskList.textContent = ""
 
     const doneTasksCount = tasks.filter(task => task.done).length;
-
     itemCounter.textContent = `${doneTasksCount}/${tasks.length}`;
 
     for (let i = 0; i < tasks.length; i++) {
         const taskLi = document.createElement("li");
-
         taskLi.textContent = tasks[i].todo;
 
         if (tasks[i].done) {
@@ -43,9 +44,9 @@ function render() {
 
         })
 
-        if (taskLi)
+        
 
-        taskLi.textContent = tasks[i].todo
+        
         taskLi.appendChild(removeBtn)
         taskList.appendChild(taskLi)
 
@@ -56,20 +57,19 @@ function render() {
     //3. lägga till elemenen  på våran hemsida
 }
 
-
-
 todoForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // const todoText = todoInput.value.trim();
+    const todoText = todoInput.value.trim();
 
-    // if (todoText === "" || todoText === " ") {
-    //     errorText.textContent = "Please enter a task!";
-    //     return;
-    // }
+    if (todoText === "") {
+        errorText.textContent = "Please enter a task!";
+        return;
+    }
 
-    // let taskObject = {task: todoText}
-    // tasks.push(taskObject);
+    errorText.textContent = "";
+
+
 
     const itemObj = {
         todo: todoInput.value,
@@ -77,7 +77,7 @@ todoForm.addEventListener("submit", function (event) {
     }
 
     tasks.push(itemObj)
-
+todoInput.value = ""
     render()
 
 });
